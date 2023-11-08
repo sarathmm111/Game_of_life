@@ -1,5 +1,6 @@
 import random
-
+import time
+import copy
 def create_grid(rows, cols):
     grid = []
     for _ in range(rows):
@@ -24,4 +25,17 @@ def count_neighbors(grid, x, y):
             count += 1
     return count
 
-
+def next_generation(current_grid):
+    rows, cols = len(current_grid), len(current_grid[0])
+    new_grid = copy.deepcopy(current_grid)
+    for x in range(rows):
+        for y in range(cols):
+            cell = current_grid[x][y]
+            neighbors = count_neighbors(current_grid, x, y)
+            if cell == 1:
+                if neighbors < 2 or neighbors > 3:
+                    new_grid[x][y] = 0
+            else:
+                if neighbors == 3:
+                    new_grid[x][y] = 1
+    return new_grid
