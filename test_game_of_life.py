@@ -19,4 +19,11 @@ def test_print_grid(capsys):
     captured = capsys.readouterr()
     assert captured.out == expected_output
     
+def test_count_neighbors():
+    grid = [[1, 0, 1],
+            [0, 1, 0],
+            [1, 1, 1]]
+    x, y = 1, 1
+    count = game_of_life.count_neighbors(grid, x, y)
+    assert count == 5
 
